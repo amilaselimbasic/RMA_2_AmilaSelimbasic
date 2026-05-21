@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Sekcija Filmovi -->
+    <item
+        android:id="@+id/nav_movies"
+        android:title="Filmovi" />
+
+    <!-- Sekcija Glumci -->
+    <item
+        android:id="@+id/nav_actors"
+        android:title="Glumci" />
+
+    <!-- Sekcija Favoriti -->
+    <item
+        android:id="@+id/nav_favorites"
+        android:title="Favoriti" />
+
+</menu>

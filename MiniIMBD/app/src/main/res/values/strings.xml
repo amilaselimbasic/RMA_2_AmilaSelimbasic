@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ime aplikacije koje se prikazuje ispod ikone -->
+    <string name="app_name">MiniIMDB</string>
+
+    <!-- Naslovi ekrana -->
+    <string name="title_movies">Filmovi</string>
+    <string name="title_actors">Glumci</string>
+    <string name="title_favorites">Favoriti</string>
+    <string name="title_details">Detalji filma</string>
+
+    <!-- Tekst za dugmad -->
+    <string name="btn_add_favorite">Dodaj u favorite</string>
+    <string name="btn_remove_favorite">Ukloni iz favorita</string>
+    <string name="btn_back">Nazad</string>
+
+    <!-- Opisi za navigaciju -->
+    <string name="nav_movies">Filmovi</string>
+    <string name="nav_actors">Glumci</string>
+    <string name="nav_favorites">Favoriti</string>
+
+    <!-- Poruke -->
+    <string name="msg_no_favorites">Još nema favorita.</string>
+    <string name="msg_loading">Učitavanje...</string>
+</resources>
