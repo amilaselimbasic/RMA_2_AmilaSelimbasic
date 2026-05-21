@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "638020869925",
+    "project_id": "gdjedanas-677cd",
+    "storage_bucket": "gdjedanas-677cd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638020869925:android:cd2e21cf3e617f78b304cc",
+        "android_client_info": {
+          "package_name": "com.example.gdjedanas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvr_HmHUBvvqO7P1BbOXtQzPpDqPY55tI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
