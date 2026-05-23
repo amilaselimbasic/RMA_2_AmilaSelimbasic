@@ -7,17 +7,65 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gdje Danas?"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:padding="16dp"/>
+        android:queryHint="Pretraži događaje..." />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Svi"/>
+
+            <Button
+                android:id="@+id/btnMusic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Muzika"/>
+
+            <Button
+                android:id="@+id/btnSport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sport"/>
+
+            <Button
+                android:id="@+id/btnTheater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Predstave"/>
+
+            <Button
+                android:id="@+id/btnOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ostalo"/>
+
+        </LinearLayout>
+
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_menu"/>
 
 </LinearLayout>
