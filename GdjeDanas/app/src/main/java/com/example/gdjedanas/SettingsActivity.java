@@ -11,13 +11,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.example.gdjedanas.storage.FavoritesStorage;
+import com.example.gdjedanas.storage.VisitedStorage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class SettingsActivity extends AppCompatActivity {
 
     Switch darkModeSwitch;
     Switch notificationSwitch;
+
     Button clearFavoritesButton;
+    Button clearVisitedButton; // ✅ DODANO
+
     BottomNavigationView bottomNavigation;
 
     SharedPreferences prefs;
@@ -39,9 +43,13 @@ public class SettingsActivity extends AppCompatActivity {
 
         darkModeSwitch = findViewById(R.id.darkModeSwitch);
         notificationSwitch = findViewById(R.id.notificationSwitch);
+
         clearFavoritesButton = findViewById(R.id.clearFavoritesButton);
+        clearVisitedButton = findViewById(R.id.clearVisitedButton); // ✅ DODANO
+
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
+        // DARK MODE
         if (darkModeSwitch != null) {
             darkModeSwitch.setChecked(dark);
 
@@ -55,12 +63,24 @@ public class SettingsActivity extends AppCompatActivity {
             });
         }
 
+        // CLEAR FAVORITES
         clearFavoritesButton.setOnClickListener(v -> {
             FavoritesStorage.clearFavorites(this);
             Toast.makeText(this, "Favorites obrisani", Toast.LENGTH_SHORT).show();
         });
 
-        // 🔥 BOTTOM NAV SAFE VERSION
+        // ✅ CLEAR VISITED (ŽELIM POSJETITI)
+        clearVisitedButton.setOnClickListener(v -> {
+            VisitedStorage.save(this, new java.util.ArrayList<>());
+
+            Toast.makeText(
+                    this,
+                    "Želim posjetiti lista obrisana",
+                    Toast.LENGTH_SHORT
+            ).show();
+        });
+
+        // BOTTOM NAVIGATION
         if (bottomNavigation != null) {
 
             bottomNavigation.setSelectedItemId(R.id.menu_settings);

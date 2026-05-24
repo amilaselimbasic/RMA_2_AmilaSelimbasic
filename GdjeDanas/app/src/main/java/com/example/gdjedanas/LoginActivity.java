@@ -124,10 +124,8 @@ public class LoginActivity extends AppCompatActivity {
                                     finish();
 
                                 } else {
-
-                                    Toast.makeText(
-                                            LoginActivity.this,
-                                            "Pogrešan email ili password",
+                                    Toast.makeText(LoginActivity.this,
+                                            task.getException().getMessage(),
                                             Toast.LENGTH_LONG).show();
                                 }
                             }

@@ -97,7 +97,6 @@ public class RegisterActivity extends AppCompatActivity {
         String confirmPassword =
                 confirmPasswordEditText.getText().toString();
 
-        // student komentar:
         // provjera da li su polja prazna
 
         if (TextUtils.isEmpty(name)) {
