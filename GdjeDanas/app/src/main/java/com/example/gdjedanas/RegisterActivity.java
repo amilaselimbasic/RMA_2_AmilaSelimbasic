@@ -130,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        // firebase registracija
+        // firebase registracija korisnika
 
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(

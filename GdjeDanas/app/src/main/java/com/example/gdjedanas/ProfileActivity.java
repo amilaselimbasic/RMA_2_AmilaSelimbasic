@@ -3,6 +3,7 @@ package com.example.gdjedanas;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,8 @@ import com.example.gdjedanas.storage.FavoritesStorage;
 import com.example.gdjedanas.storage.VisitedStorage;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -26,10 +29,17 @@ public class ProfileActivity extends AppCompatActivity {
     Button logoutButton;
     Button resetPasswordButton;
 
+    //  DODANO ZA EDIT PROFIL
+    EditText editName;
+    Button saveProfileButton;
+
     FavoriteAdapter favoriteAdapter;
     FavoriteAdapter visitedAdapter;
 
     BottomNavigationView bottomNavigation;
+
+    //  Firebase DB
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +48,24 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         // INIT VIEW
-
         userEmail = findViewById(R.id.userEmail);
-
         favoriteRecycler = findViewById(R.id.favoriteRecycler);
-
         visitedRecycler = findViewById(R.id.visitedRecycler);
-
         logoutButton = findViewById(R.id.logoutButton);
-
         resetPasswordButton = findViewById(R.id.resetPasswordButton);
+
+
+        editName = findViewById(R.id.editName);
+        saveProfileButton = findViewById(R.id.saveProfileButton);
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
-        // USER EMAIL
+        // Firebase reference
+        databaseReference = FirebaseDatabase.getInstance().getReference("Users");
 
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        // USER EMAIL
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
 
             String email =
@@ -63,21 +76,17 @@ public class ProfileActivity extends AppCompatActivity {
             userEmail.setText(email);
 
             // RESET PASSWORD
-
             resetPasswordButton.setOnClickListener(v -> {
 
                 FirebaseAuth.getInstance()
                         .sendPasswordResetEmail(email)
                         .addOnSuccessListener(unused ->
-
                                 Toast.makeText(
                                         this,
                                         "Reset email poslan",
                                         Toast.LENGTH_SHORT
                                 ).show())
-
                         .addOnFailureListener(e ->
-
                                 Toast.makeText(
                                         this,
                                         e.getMessage(),
@@ -86,8 +95,40 @@ public class ProfileActivity extends AppCompatActivity {
             });
         }
 
-        // FAVORITES
+        //   UČITAJ IME IZ FIREBASE
+        databaseReference.child(userId)
+                .child("name")
+                .get()
+                .addOnSuccessListener(snapshot -> {
+                    if (snapshot.exists()) {
+                        editName.setText(snapshot.getValue(String.class));
+                    }
+                });
 
+        //  SAVE IME
+        saveProfileButton.setOnClickListener(v -> {
+
+            String newName = editName.getText().toString().trim();
+
+            if (newName.isEmpty()) {
+                editName.setError("Unesi ime");
+                return;
+            }
+
+            databaseReference.child(userId)
+                    .child("name")
+                    .setValue(newName)
+                    .addOnSuccessListener(unused ->
+                            Toast.makeText(this,
+                                    "Profil ažuriran",
+                                    Toast.LENGTH_SHORT).show())
+                    .addOnFailureListener(e ->
+                            Toast.makeText(this,
+                                    e.getMessage(),
+                                    Toast.LENGTH_LONG).show());
+        });
+
+        // FAVORITES
         favoriteRecycler.setLayoutManager(
                 new LinearLayoutManager(this));
 
@@ -97,8 +138,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         favoriteRecycler.setAdapter(favoriteAdapter);
 
-        // VISITED (ŽELIM POSJETITI)
-
+        // VISITED
         if (visitedRecycler != null) {
 
             visitedRecycler.setLayoutManager(
@@ -112,7 +152,6 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         // LOGOUT
-
         logoutButton.setOnClickListener(v -> {
 
             FirebaseAuth.getInstance().signOut();
@@ -131,7 +170,6 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         // BOTTOM NAVIGATION
-
         bottomNavigation.setSelectedItemId(R.id.menu_profile);
 
         bottomNavigation.setOnItemSelectedListener(item -> {
@@ -167,15 +205,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         super.onResume();
 
-        // refresh favorites
-
         favoriteAdapter =
                 new FavoriteAdapter(
                         FavoritesStorage.load(this));
 
         favoriteRecycler.setAdapter(favoriteAdapter);
-
-        // refresh visited
 
         if (visitedRecycler != null) {
 

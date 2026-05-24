@@ -20,7 +20,7 @@ public class SettingsActivity extends AppCompatActivity {
     Switch notificationSwitch;
 
     Button clearFavoritesButton;
-    Button clearVisitedButton; // ✅ DODANO
+    Button clearVisitedButton; //  DODANO
 
     BottomNavigationView bottomNavigation;
 
@@ -45,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
         notificationSwitch = findViewById(R.id.notificationSwitch);
 
         clearFavoritesButton = findViewById(R.id.clearFavoritesButton);
-        clearVisitedButton = findViewById(R.id.clearVisitedButton); // ✅ DODANO
+        clearVisitedButton = findViewById(R.id.clearVisitedButton); //  DODANO
 
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
@@ -69,7 +69,7 @@ public class SettingsActivity extends AppCompatActivity {
             Toast.makeText(this, "Favorites obrisani", Toast.LENGTH_SHORT).show();
         });
 
-        // ✅ CLEAR VISITED (ŽELIM POSJETITI)
+        //  CLEAR VISITED (ŽELIM POSJETITI)
         clearVisitedButton.setOnClickListener(v -> {
             VisitedStorage.save(this, new java.util.ArrayList<>());
 

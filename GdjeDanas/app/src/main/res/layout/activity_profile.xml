@@ -34,6 +34,22 @@
                 android:textSize="18sp"
                 android:layout_marginTop="12dp"/>
 
+            <!-- ✅ DODANO: EDIT IME -->
+            <EditText
+                android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Unesi ime"
+                android:layout_marginTop="15dp"/>
+
+            <!-- ✅ DODANO: SAVE BUTTON -->
+            <Button
+                android:id="@+id/saveProfileButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sačuvaj promjene"
+                android:layout_marginTop="10dp"/>
+
             <!-- RESET PASSWORD -->
             <Button
                 android:id="@+id/resetPasswordButton"
